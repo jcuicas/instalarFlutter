@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<title>Pasos para instalar Flutter en Windows</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<link rel="stylesheet" href="assets/css/pico.min.css">
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+  <header>
+	<h1 style="font-size: 1.5rem;">
+		<p><strong>Pasos para instalar Flutter y las herramientas necesarias para utilizar el SDK para crear aplicaciones móviles en Windows.</strong></p>
+	</h1>  
+  </header>
+  <main class="container">
+	  <ol>
+	  <li>
+	  <p>Descargar el Visual Studio Code desde la siguiente URL:</p>
+	  <ul>
+	  <li><a href="https://code.visualstudio.com/download" target="_blank">https://code.visualstudio.com/download </a></li>
+	  </ul>
+	  <p><img src="assets/img/Aspose.Words.c6a010d4-6cec-4493-9a8c-a9bd719d0e5f.001.jpeg" alt=""></p>
+	  <ul>
+	  <li>Luego Instalar el Visual Studio Code.</li>
+	  </ul>
+	  </li>
+	  <li>
+	  <p>Después de instalar abrir Visual Studio Code ir a la barra lateral izquierda y pulsar el icono de extensiones buscar java e instalar Extension Pack for Java.</p>
+	  <p><img src="assets/img/Aspose.Words.c6a010d4-6cec-4493-9a8c-a9bd719d0e5f.002.jpeg" alt=""></p>
+	  </li>
+	  <li>
+	  <p>En la ventana de bienvenida de Visual Studio Code pulsar en la esquina inferior derecha el enlace de Más… y seleccionar Get Started with Java Development.</p>
+	  <p><img src="assets/img/Aspose.Words.c6a010d4-6cec-4493-9a8c-a9bd719d0e5f.003.jpeg" alt=""></p>
+	  </li>
+	  <li>
+	  <p>Luego pulsar el botón Install el JDK (Java Development Kid), y seleccionar 17 (LTS) y pulsar el botón Download (Descargar).</p>
+	  <p><img src="assets/img/Aspose.Words.c6a010d4-6cec-4493-9a8c-a9bd719d0e5f.004.jpeg" alt=""></p>
+	  </li>
+	  <li>
+	  <p>Al terminar la descarga ir a la carpeta de descargas e instalar OpenJDK17</p>
+	  <p><img src="assets/img/Aspose.Words.c6a010d4-6cec-4493-9a8c-a9bd719d0e5f.005.png" alt=""></p>
+	  </li>
+	  <li>
+	  <p>Descarga Git para Windows desde la siguiente URL:</p>
+	  <ul>
+	  <li><a href="https://git-scm.com/downloads" target="_blank"> https://git-scm.com/downloads </a></li>
+	  </ul>
+	  <p><img src="assets/img/Aspose.Words.c6a010d4-6cec-4493-9a8c-a9bd719d0e5f.006.png" alt=""></p>
+	  </li>
+	  <li>
+	  <p>Instalar Git para Windows.</p>
+	  </li>
+	  <li>
+	  <p>Descarga el SDK Flutter para Windows desde la siguiente URL:</p>
+	  <ul>
+	  <li><a href="https://flutter.dev/docs/get-started/install/windows" target="_blank"> https://flutter.dev/docs/get-started/install/windows </a></li>
+	  </ul>
+	  <p><img src="assets/img/Aspose.Words.c6a010d4-6cec-4493-9a8c-a9bd719d0e5f.007.png" alt=""></p>
+	  <p><img src="assets/img/Aspose.Words.c6a010d4-6cec-4493-9a8c-a9bd719d0e5f.008.png" alt=""></p>
+	  </li>
+	  <li>
+	  <p>Descarga Android Command Tools para Windows desde la siguiente URL:</p>
+	  <ul>
+	  <li><a href="https://developer.android.com/studio/#command-tools" target="_blank"> https://developer.android.com/studio/#command-tools </a></li>
+	  </ul>
+	  <p><img src="assets/img/Aspose.Words.c6a010d4-6cec-4493-9a8c-a9bd719d0e5f.009.jpeg" alt=""></p>
+	  </li>
+	  <li>
+	  <p>Crea un directorio en tu unidad C: y colócale el nombre de Android</p>
+	  <ul>
+	  <li>C:\Android</li>
+	  </ul>
+	  </li>
+	  <li>
+	  <p>Extrae el archivo ZIP del SDK de Flutter en la carpeta <strong>C:\Android</strong>, en una subcarpeta llamada <strong>flutter</strong> la ruta completa se ve así:</p>
+	  <ul>
+	  <li>C:\Android\flutter</li>
+	  </ul>
+	  </li>
+	  <li>
+	  <p>Instala las Android Command Tools. Antes de extraer el archivo ZIP, crea una carpeta dentro de <strong>C:\Android</strong> con el nombre <strong>cmdline-tools</strong>, el directorio se ve así:</p>
+	  <ul>
+	  <li>C:\Android\cmdline-tools</li>
+	  </ul>
+	  </li>
+	  <li>
+	  <p>Dentro de ese directorio extrae el ZIP y renombra la carpeta extraída a <strong>tools</strong>, el directorio se ve así:</p>
+	  <ul>
+	  <li>C:\Android\cmdline-tools\tools</li>
+	  </ul>
+	  </li>
+	  <li>
+	  <p>Configure algunas variables de entorno:</p>
+	  <p><img src="assets/img/Aspose.Words.c6a010d4-6cec-4493-9a8c-a9bd719d0e5f.010.png" alt=""></p>
+	  <ul>
+	  <li>ANDROID_HOME</li>
+	  </ul>
+	  <p><img src="assets/img/Aspose.Words.c6a010d4-6cec-4493-9a8c-a9bd719d0e5f.011.jpeg" alt=""></p>
+	  <ul>
+	  <li>En el Path de variables de usuario o variables de sistema crear:</li>
+	  </ul>
+	  <p><img src="assets/img/Aspose.Words.c6a010d4-6cec-4493-9a8c-a9bd719d0e5f.012.jpeg" alt=""></p>
+	  <ul>
+	  <li>En el Path de variables de usuario o variables de sistema crear:</li>
+	  </ul>
+	  <p><img src="assets/img/Aspose.Words.c6a010d4-6cec-4493-9a8c-a9bd719d0e5f.013.jpeg" alt=""></p>
+	  </li>
+	  <li>
+	  <p>Para conocer Android API Levels visite la siguiente URL:</p>
+	  <ul>
+	  <li><a href="https://apilevels.com/" target="_blank"> https://apilevels.com/ </a></li>
+	  </ul>
+	  <p><img src="assets/img/Aspose.Words.c6a010d4-6cec-4493-9a8c-a9bd719d0e5f.014.jpeg" alt=""></p>
+	  </li>
+	  <li>
+	  <p>Descarga el SDK de Android. Para que Flutter funcione necesitamos instalar el SDK de Android y las API Levels, ejecute los siguientes comandos en la ventana de símbolo del sistema:</p>
+	  <ul>
+	  <li>sdkmanager “system-images;android-33;default;x86_64”</li>
+	  <li>sdkmanager “platform-tools”</li>
+	  <li>sdkmanager “build-tools;33.0.0”</li>
+	  <li>sdkmanager “platforms;android-33”</li>
+	  <li>sdkmanager emulator</li>
+	  <li>Configurar la ruta del SDK para Flutter.</li>
+	  </ul>
+	  </li>
+	  <li>
+	  <p>Configurar la ruta del SDK para Flutter.</p>
+	  <ul>
+	  <li>flutter config --android-sdk C:\Android\</li>
+	  </ul>
+	  </li>
+	  <li>
+	  <p>Abrir Visual Studio Code buscar y descarga la extensión Flutter y Awesome Flutter Snippets.</p>
+	  <p><img src="assets/img/Aspose.Words.c6a010d4-6cec-4493-9a8c-a9bd719d0e5f.015.jpeg" alt=""></p>
+	  </li>
+	  <li>
+	  <p>Descargar el Visual Studio Build Tools desde la siguiente URL:</p>
+	  <ul>
+	  <li><a href="https://visualstudio.microsoft.com/es/downloads/" target="_blank">https://visualstudio.microsoft.com/es/downloads/ </a></li>
+	  <li>Buscar en la parte de debajo de la página. Herramientas para Visual Studio y descarga Build Tools para Visual Studio 2022.</li>
+	  </ul>
+	  <p><img src="assets/img/Aspose.Words.c6a010d4-6cec-4493-9a8c-a9bd719d0e5f.016.jpeg" alt=""></p>
+	  </li>
+	  <li>
+	  <p>Instalar vs_BuildTools</p>
+	  <p><img src="assets/img/Aspose.Words.c6a010d4-6cec-4493-9a8c-a9bd719d0e5f.017.png" alt=""></p>
+	  </li>
+	  <li>
+	  <p>Ejecución de Flutter Doctor. Ejecuta este comando:</p>
+	  <ul>
+	  <li>flutter doctor –v</li>
+	  </ul>
+	  <p><img src="assets/img/Aspose.Words.c6a010d4-6cec-4493-9a8c-a9bd719d0e5f.018.jpeg" alt=""></p>
+	  </li>
+	  <li>
+	  <p>Si en este paso aún no se han aceptados las licencias utiliza el siguiente comando:</p>
+	  <ul>
+	  <li>flutter doctor --android-licenses</li>
+	  <li>presione <em><strong>y</strong></em> luego <em><strong>Enter</strong></em> para cada licencia.</li>
+	  </ul>
+	  </li>
+	  </ol>
+	  <p><em>Este comando te da una tilde verde para indicar lo que tienes instalado y listo para usar.</em></p>
+	  <p><strong>Nota:</strong> Personalmente prefiero ejecutar una aplicación para Android en un dispositivo físico si tu pc tiene  bajas  especificaciones  o  si  necesitas  construir  la  aplicación  rápidamente  porque  en  el emulador  tu  PC  consumirá  mucho  R.A.M  mientras  ejecute  el  emulador  y  será  muy  lento  el desarrollo.</p>
+	  <p><strong>Extra:</strong>  En  tu  Smartphone tienes  que  ir  a  Configuración  activar  las opciones  de   desarrollador. Después activar la Depuración USB. Luego activar Instalar vía USB y por ultimo desactivar Verificar aplicaciones por USB. Para usar tu Smartphone como dispositivo físico.</p>
+	</main>
+	<footer>
+	  <a href="assets/pdf/Pasos para instalar Flutter en Windows.pdf"
+	    role="button"
+	    download="Pasos para instalar Flutter en Windows.pdf"
+		style="text-decoration: none;"
+		>Descargar guía en archivo PDF</a>
+  	</footer>
+</body>
+</html>
