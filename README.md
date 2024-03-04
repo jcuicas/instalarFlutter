@@ -89,7 +89,6 @@
     - sdkmanager “build-tools;33.0.0” 
     - sdkmanager “platforms;android-33” 
     - sdkmanager emulator 
-    - Configurar la ruta del SDK para Flutter. 
 
 17. Configurar la ruta del SDK para Flutter.
     - flutter config --android-sdk C:\Android\ 
