@@ -107,13 +107,17 @@
 
     ![](assets/img/Aspose.Words.c6a010d4-6cec-4493-9a8c-a9bd719d0e5f.017.png)
 
-21. Ejecución de Flutter Doctor. Ejecuta este comando: 
+21. Instalar Visual Studio Build Tools 2022.
+
+    ![](assets/img/Aspose.Words.c6a010d4-6cec-4493-9a8c-a9bd719d0e5f.018.png)
+
+22. Ejecución de Flutter Doctor. Ejecuta este comando: 
 
     - flutter doctor –v 
 
-    ![](assets/img/Aspose.Words.c6a010d4-6cec-4493-9a8c-a9bd719d0e5f.018.jpeg)
+    ![](assets/img/Aspose.Words.c6a010d4-6cec-4493-9a8c-a9bd719d0e5f.019.jpeg)
 
-22. Si en este paso aún no se han aceptados las licencias utiliza el siguiente comando: 
+23. Si en este paso aún no se han aceptados las licencias utiliza el siguiente comando: 
     - flutter doctor --android-licenses 
     - presione ***y*** luego ***Enter*** para cada licencia. 
 
