@@ -117,7 +117,12 @@
 
     ![](assets/img/Aspose.Words.c6a010d4-6cec-4493-9a8c-a9bd719d0e5f.019.jpeg)
 
-23. Si en este paso aún no se han aceptados las licencias utiliza el siguiente comando: 
+23. Instalar un emulador para android - MSI App Player desde la siguiente URL: 
+     - [https://www.msi.com/Landing/appplayer ](https://www.msi.com/Landing/appplayer)
+    
+    ![](assets/img/Aspose.Words.c6a010d4-6cec-4493-9a8c-a9bd719d0e5f.020.png)
+
+24. Si en este paso aún no se han aceptados las licencias utiliza el siguiente comando: 
     - flutter doctor --android-licenses 
     - presione ***y*** luego ***Enter*** para cada licencia. 
 
